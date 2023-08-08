@@ -62,7 +62,7 @@
 
     <router-view />
 </div>
-<!-- <Modal /> -->
+<Modal />
 </template>
 
 <script>
