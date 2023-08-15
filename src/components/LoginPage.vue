@@ -4,7 +4,7 @@
         <form action="">
             <h1 style="color: black">Login</h1>
             <div class="input-box">
-                <input v-model="Email" type="text" placeholder="Email" style="border-radius: 50px; color: black; width: 90%" required />
+                <input v-model="Email" type="text" placeholder="Email" @input="InputEvent2" style="border-radius: 30px; color: black;" required />
                 <i class="bx bxs-user"></i>
                 <p style="color: red">{{ this.Error.Email }}</p>
             </div>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "loginPageComponents",
     data() {
@@ -38,6 +40,12 @@ export default {
         };
     },
     methods: {
+        InputEvent() {
+            this.Error.Password = "";
+        },
+        InputEvent2() {
+            this.Error.Email = "";
+        },
         Login() {
             this.Error = {};
             if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.Email)) {
@@ -54,39 +62,63 @@ export default {
                 return;
             }
 
-            // let details = {
-            //     Email: this.Email,
-            //     Password: this.Password
-            // }
-
-            fetch("https://blog-api-dev.octalinfotech.com/api/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: this.Email,
-                        password: this.Password,
-                    }),
-                })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    if (res.data) {
-                        console.log("login");
-                        this.$toast.show(res.message, {
-                            type: "success",
-                            position: "top-right",
-                        });
-                        localStorage.setItem("data", JSON.stringify(res.data));
-
-                    } else {
-                        console.log(res.message);
-                    }
+            // ==================
+            axios.post('https://blog-api-dev.octalinfotech.com/api/login', {
+                email: this.Email,
+                password: this.Password
+            }).then((response) => {
+                console.log(response.data.message);
+                localStorage.setItem('user', JSON.stringify(response.data.data));
+                this.successfully = response.data.message
+                this.$toast.show(response.data.message, {
+                    type: "success",
+                    position: "top-right",
                 });
-            this.$router.push({
-                name: 'HomePage'
-            })
+
+            }).catch(err => {
+                console.log(err);
+
+                this.$toast.show(err.response.data.message, {
+                    type: "error",
+                    position: "top-right",
+                });
+                console.log(123);
+
+                this.$router.push({
+                    name: 'HomePage'
+                });
+            });
+
+            // ====================
+
+            // fetch("https://blog-api-dev.octalinfotech.com/api/login", {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //         body: JSON.stringify({
+            //             email: this.Email,
+            //             password: this.Password,
+            //         }),
+            //     })
+            //     .then((res) => res.json())
+            //     .then((res) => {
+            //         console.log(res);
+            //         if (res.data) {
+            //             console.log("login");
+            //             this.$toast.show(res.message, {
+            //                 type: "success",
+            //                 position: "top-right",
+            //             });
+            //             localStorage.setItem("data", JSON.stringify(res.data));
+
+            //         } else {
+            //             console.log(res.message);
+            //         }
+            //     });
+            // this.$router.push({
+            //     name: 'HomePage'
+            // })
 
         },
     },
@@ -97,13 +129,14 @@ export default {
 .wrapper {
     margin-top: 50px;
     width: 420px;
-    background: transparent;
-    color: #fff;
+    background: aliceblue;
+        color: #fff;
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(100px);
-    box-shadow: 0 0 10px rgb(0, 67, 85);
+    box-shadow: 0 0 100px rgb(27, 30, 31);
     border-radius: 10px;
     padding: 30px 40px;
+
 }
 
 .wrapper h1 {

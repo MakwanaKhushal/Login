@@ -103,11 +103,11 @@ export default {
     },
     methods: {
         getemail() {
-            let user = localStorage.getItem("data");
-            user = JSON.parse(user)
-            this.email = user.email
-            this.password = user.name
-            console.log();
+            // let user = localStorage.getItem("data");
+            // user = JSON.parse(user)
+            // this.email = user.email
+            // this.password = user.name
+            // console.log();
         },
 
     },

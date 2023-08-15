@@ -3,18 +3,15 @@
 <div>
     <nav class="navbar navbar-expand-lg  bg-light sticy">
         <img src="https://octalinfotech.com/img/octal-logo.png" alt="" style="width: 2%; border-radius: 45px" />
-        <a class="navbar-brand" href="#">Octal infotech</a>
+        <h1 class="navbar-brand" >Octal infotech</h1>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="
-          justify-content: center;
-          align-items: baseline;
           background-color: skyblue;
             justify-content: end;
-          height: 60px;
         ">
-            <div class="form-inline my-2 my-lg-0 d-flex">
+            <div class="form-inline ">
                 <div class="dropdown " >
-                    <img class="dropbtn" src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68" alt="" style="width: 84%; border-radius: 30%;" />
+                    <img class="dropbtn" src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68"  />
                     <div class="dropdown-content">
                         <button type="button" class="btn btn-" data-bs-toggle="modal" data-bs-target="#myModal">
                             Profile
@@ -32,6 +29,7 @@
         </div>
     </nav>
 </div>
+
 <!-- ========================== -->
 <div class="d-flex  flex-column ">
     <div class="sidebar" style="background-color: gainsboro; width: 172px">
@@ -66,11 +64,11 @@
 </template>
 
 <script>
-// import Modal from '@/components/Modal'
+import Modal from '@/components/Modal'
 export default {
     name: "SideBar",
     components: {
-        // Modal
+        Modal
     },
     data() {
         return {
@@ -92,8 +90,8 @@ export default {
 <style scoped>
 .dropbtn {
     color: white;
-    border: none;
     cursor: pointer;
+    border-radius: 40%;
 }
 
 .dropdown {
@@ -109,7 +107,7 @@ export default {
     background-color: #f9f9f9;
     border-radius: 15px;
     min-width: 100px;
-    box-shadow: 8px 16px 32px 16px rgba(1, 1, 1, 0.3);
+    box-shadow: 3px 3px 22px 4px rgba(0.5, 0.5, 0.5, 0.3);
     z-index: 1;
     justify-content: center;
     align-items: center;

@@ -22,11 +22,11 @@
                     <input class="modalinput" type="text" id="fname" name="firstname" placeholder="Your name.." v-model="name">
                     <div style="display: flex;"><label for="fname"><b>Image :</b></label></div>
                     <input class="modalinput" type="file" @change="addImage">
-                    <!-- <img :src="url" alt=""> -->
+                    <img :src="url" alt="" style="width:50%;">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="add">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="add">Save </button>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     <input class="modalinput" type="text" id="fname" name="firstname" v-model="update.name">
                     <div style="display: flex;"><label for="fname"><b>Image :</b></label></div>
                     <input class="modalinput" type="file" @change="addImage">
-                    <!-- <img :src="url" alt=""> -->
+                    <img :src="url" alt="" style="width:50%;">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -67,7 +67,7 @@
     </thead>
     <tbody>
         <tr v-for="api in data" :key="api" scope="row">
-            <td style="width: 33%;"><img :src="api.image" style="width:10%;border-radius: 40px;"></td>
+            <td style="width: 33%;"><img :src="api.image" style="width:15%;border-radius: 50px;"></td>
             <!-- <td>{{api.id}}</td> -->
             <td>{{api.name }}</td>
             <td>
