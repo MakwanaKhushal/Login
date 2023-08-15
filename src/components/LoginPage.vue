@@ -53,7 +53,6 @@ export default {
             if (Object.keys(this.Error).length > 0) {
                 return;
             }
-
             // let details = {
             //     Email: this.Email,
             //     Password: this.Password
