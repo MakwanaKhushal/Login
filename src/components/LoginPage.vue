@@ -58,7 +58,6 @@ export default {
             //     Email: this.Email,
             //     Password: this.Password
             // }
-
             fetch("https://blog-api-dev.octalinfotech.com/api/login", {
                     method: "POST",
                     headers: {
