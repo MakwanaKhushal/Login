@@ -1,20 +1,13 @@
 <template>
-<!-- <div>
-{{$route.name}}
-</div> -->
 
-<router-view v-if="$route.name == 'LoginPage'"></router-view>
-<!-- <router-view v-if="$route.name=='LoginPage'"></router-view>  -->
-<HomePage v-else />
+<router-view ></router-view>
+
 </template>
 
 <script>
-import HomePage from "./components/HomePage.vue";
 export default {
     name: "App",
-    components: {
-        HomePage,
-    },
+  
 };
 </script>
 

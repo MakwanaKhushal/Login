@@ -1,45 +1,121 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Auth from "./Middlewer/Auth";
+import middlewarePipeline from "./Middlewer/middleware-pipeline";
+
 const routes = [
-  {
-    path: "/",
-    name: "HomePage",
-    redirect: "/homePage",
-  },
   {
     path: "/loginPage",
     name: "LoginPage",
+    
+  
     component: () => import("../components/LoginPage.vue"),
   },
+
   {
-    path: "/deshBoard",
-    name: "DeshBoard",
-    component: () => import("../components/DeshBoard.vue"),
+    path: "/",
+    name: "WebPage",
+ 
+    component: () => import('@/components/Webpage/WebPage'),
   },
   {
-    path: "/newsPage",
-    name: "NewsPage",
-    component: () => import("../components/NewsPage.vue"),
+    path: "/blogShow/:id",
+    name: "BlogShow",
+ 
+    component: () => import('@/components/Webpage/BlogShow'),
+  },
+
+
+  
+  {
+    path: "/admin",
+    name: "Admin",
+    redirect : '/admin/deshBoard',
+    meta: {
+      middleware: [Auth],
+    },
+    
+    component : ()=> import('@/components/Admin'),
+    children : [
+      {
+        path: "user",
+        name: "User",
+        
+      
+        component: () => import("../components/User.vue"),
+      },
+
+      {
+        path: "deshBoard",
+        name: "DeshBoard",
+     
+        component: () => import("./DeshBoard.vue"),
+      },
+      {
+        path: "blog",
+        name: "Blog",
+    
+        component: () => import("./Blog.vue"),
+      },
+      {
+        path: "categories",
+        name: "Categories",
+    
+        component: () => import("./Categories.vue"),
+      },
+      {
+        path: "tags",
+        name: "Tags",
+      
+        component: () => import("@/components/Tags.vue"),
+      },
+  
+      {
+        path: "creatblog",
+        name: "CreatBlog",
+      
+        component: () => import("../components/CreatBlog.vue"),
+      },
+      {
+        path: "editblog/:id",
+        name: "EditBlog",
+        meta: {
+          middleware: [Auth],
+        },
+        component: () => import("../components/EditBlog.vue"),
+      },
+    ]
   },
   {
-    path: "/helloWorld",
-    name: "HelloWorld",
-    component: () => import("../components/HelloWorld.vue"),
+    name: "/PageNotFound",
+    path: "/:pathMatch(.*)*",
+    component: () => import("../components/PageNotFound.vue"),
   },
-  {
-    path: "/tags",
-    name: "Tags",
-    component: () => import('@/components/Tags.vue'),
-  },
-  {
-    path: "/homePage",
-    name: "HomePage",
-    component: () => import("./HomePage.vue"),
-  },
+  
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  /** Navigate to next if middleware is not applied */
+  if (!to.meta.middleware) {
+    return next();
+  }
+
+  const middleware = to.meta.middleware;
+  const context = {
+    to,
+    from,
+    next,
+    //   store  | You can also pass store as an argument
+  };
+
+  return middleware[0]({
+    ...context,
+    next: middlewarePipeline(context, middleware, 1),
+  });
 });
 
 export default router;

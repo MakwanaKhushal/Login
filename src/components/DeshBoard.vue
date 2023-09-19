@@ -1,103 +1,91 @@
+<script setup></script>
+
 <template>
+<br>
 
-<div class="col py-3">
+      <div class="name">
+      <img src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68" style="border-radius: 47%;" alt="">
+      <h3> <b class="text-2xl">Good Morning, Khushal Makwana</b></h3>
+      </div>
 
-    contain
-
-    <div class="d-flex" style="  justify-content: center;">
-        <div class="card mt-4 mr-4" style="    margin-left: 10px;">
-
-            <div>
-                <slot name="image"> <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" style="width:100%">
-                </slot>
-
-                <div class="container">
-                    <h4><b>Jane Doe</b></h4>
-                    <p>Interior Designer</p>
-                </div>
-            </div>
-
-        </div>
-        <div class="card mt-4 mr-4" style="    margin-left: 10px;">
-
-            <div>
-                <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" style="width:100%">
-                <div class="container">
-                    <h4><b>Same Doe</b></h4>
-                    <p>Interior Designer</p>
-                </div>
-            </div>
-
-        </div>
-        <div class="card mt-4 mr-4" style="    margin-left: 10px;">
-
-            <div>
-                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNvrBeIcwEyj7MKLlelk8KfoYkpsLEE72UJTuwgD-LUr4lN4Xc" alt="Avatar" style="width:100%">
-                <div class="container">
-                    <h4><b>Brus Doe</b></h4>
-                    <p>Interior Designer</p>
-                </div>
-            </div>
-
-        </div>
-        <div class="card mt-4 mr-4" style="    margin-left: 10px;">
-
-            <div>
-                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRRcpdRpnqbPpzbroxdM7SWB3JG03A-C3qmNT_xv-yUxIQM8gi3" alt="Avatar" style="width:100%">
-                <div class="container">
-                    <h4><b>Hulk Doe</b></h4>
-                    <p>Interior Designer</p>
-                </div>
-            </div>
-
-        </div>
+    <div style="    display: flex; justify-content: center;
+    gap: 30px;
+    margin-top: 35px;">
+      <div
+    data-v-cef1fb98=""
+    class="flex flex-wrap justify-between gap-5 px-8 py-3 bg-green-100 rounded-sm shadow border-b-4 border-green-500"
+    style="width: 20%;
+    
+    "
+  >
+    <a
+      data-v-cef1fb98=""
+      href="/student/complete-tasks"
+      class=""
+      style="text-decoration: none"
+    >
+      <h5
+        data-v-cef1fb98=""
+        class="mb-2 text-2xl font-semibold tracking-tight text-green-600 dark:text-white"
+      >
+        Blogs
+      </h5>
+    </a>
+    <h1 data-v-cef1fb98="" class="text-2xl font-semibold text-black">68</h1>
+  </div>
+    <div
+    data-v-cef1fb98=""
+    class="flex flex-wrap justify-between gap-5 px-8 py-3 bg-red-100 rounded-sm shadow border-b-4 border-red-500"
+    style="width: 20%;
+    "
+  >
+    <a
+      data-v-cef1fb98=""
+      href="/student/complete-tasks"
+      class=""
+      style="text-decoration: none"
+    >
+      <h5 class="mb-2 text-2xl font-semibold tracking-tight text-red-600 dark:text-white">
+        Tags 
+      </h5>
+    </a>
+    <h1 data-v-cef1fb98="" class="text-2xl font-semibold text-black">36</h1>
+  </div>
+    <div
+    data-v-cef1fb98=""
+    class="flex flex-wrap justify-between gap-5 px-8 py-3  bg-blue-100 rounded-sm shadow border-b-4 border-blue-500"
+    style="width: 20%;
+  
+    "
+  >
+    <a
+      data-v-cef1fb98=""
+      href="/student/complete-tasks"
+      class=""
+      style="text-decoration: none"
+    >
+      <h5
+        data-v-cef1fb98=""
+        class="mb-2 text-2xl font-semibold tracking-tight text-blue-600 dark:text-white"
+      >
+        Categories
+      </h5>
+    </a>
+    <h1 data-v-cef1fb98="" class="text-2xl font-semibold text-black">92</h1>
+  </div>
     </div>
-</div>
+    
+
 </template>
 
-<script>
-export default {
-    name: "DeshboardComponenet",
-    data() {
-        return {}
-    },
-    mounted() {
-
-    },
-
-}
-</script>
-
 <style scoped>
-.sticy {
-    position: -webkit-sticky;
-    position: sticky;
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-left: -45%;
+    margin-top: 45px;
 }
 </style>
-<style scoped>
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 20%;
-    border-radius: 5px;
-}
 
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(9, 9, 9, 0.9);
-}
-
-img {
-    border-radius: 5px 5px 0 0;
-}
-
-.container {
-    padding: 2px 16px;
-}
-</style><style scoped>
-footer {
-    text-align: center;
-    padding: 3px;
-    background-color: rgb(151, 151, 151);
-    color: rgb(75, 71, 71);
-}
-</style>

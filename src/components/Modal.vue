@@ -3,12 +3,12 @@
     <div class="container mt-3">
 
         <button type="button" class="btn btn-" data-bs-toggle="modal" data-bs-target="#myModal">
-            Profile
+            
         </button>
     </div>
 
     <!-- The Modal -->
-    <div class="modal" id="myModal">
+    <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -22,18 +22,17 @@
                 <div class="modal-body">
 
                     <form>
-                        <label for="fname">Email:</label>
-                        <input type="text" id="fname" name="fname" v-model="email">
+                        <div style="display: flex;"><label for="fname"><b>Email :</b></label></div>
+                        <input type="text" id="fname" name="fname" v-model="profile.name" style="width:100%;">
                         <br>
-                        <br>
-                        <label for="lname">Passworld:</label>
-                        <input type="text" id="lname" name="lname" v-model="password">
+                        <div style="display: flex;"><label for="fname"><b>Name :</b></label></div>
+                        <input type="text" id="lname" name="lname" v-model="profile.email" style="width:100%;">
                     </form>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 border border-blue-700 rounded-md" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>
@@ -46,12 +45,12 @@
     <div class="container mt-3">
 
         <button type="button" class="btn btn-" data-bs-toggle="modal" data-bs-target="#ChangePassworld">
-            ChangePassworld
+            
         </button>
     </div>
 
     <!-- The Modal -->
-    <div class="modal" id="ChangePassworld">
+    <div class="modal fade" id="ChangePassworld">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -65,22 +64,20 @@
                 <div class="modal-body">
 
                     <form>
-                        <label for="fname">old Passworld</label>
-                        <input type="text" id="fname" name="fname" >
+                        <div style="display: flex;"><label for="fname"><b>old Password :</b></label></div>
+                        <input type="text" id="fname" name="fname"  style="width:100%;">
                         <br>
+                        <div style="display: flex;"><label for="lname"><b>New Passeord :</b></label></div>
+                        <input type="text" id="lname" name="lname" style="width:100%;">
                         <br>
-                        <label for="lname">New Passworld:</label>
-                        <input type="text" id="lname" name="lname" >
-                        <br>
-                        <br>
-                        <label for="lname"> Confirm Passworld:</label>
-                        <input type="text" id="lname" name="lname" >
+                        <div style="display: flex;"><label for="lname"><b>Confirm Password :</b></label></div>
+                        <input type="text" id="lname" name="lname"  style="width:100%;">
                     </form>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 border border-blue-700 rounded-md" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>
@@ -91,35 +88,29 @@
 
 </template>
 
-<script>
-export default {
-    name: "ModalComponent",
-    data() {
-        return {
-            Modal: "",
-            email: "",
-            password: "",
-        }
-    },
-    methods: {
-        getemail() {
-            // let user = localStorage.getItem("data");
-            // user = JSON.parse(user)
-            // this.email = user.email
-            // this.password = user.name
-            // console.log();
-        },
+<script setup>
 
-    },
-    created() {
-        this.getemail()
-    }
-}
+import { ref } from "vue";
+
+const profile = ref({
+    name :'',
+    email :''
+}) 
+
+let data = localStorage.getItem('user')
+    data = JSON.parse(data)
+
+    profile.value.name= data.name
+    profile.value.email= data.email
+
 </script>
 
 <style scoped>
 input {
     border: 2px solid;
     border-radius: 5px;
+}
+.modal-content{
+    border-radius: 20px;
 }
 </style>
