@@ -2,9 +2,9 @@
 <div class="d-flex  flex-column ">
     <!-- Button trigger modal -->
     <div>
-    <div>
-    <div class="user">TAGS</div>
-</div>
+        <div>
+            <div class="user">Tags</div>
+        </div>
         <div style="display: flex; justify-content: end;margin-right: 7%;margin-top:-40px;">
             <button type="button" class="btn  mt-2 mb-3" style="background: #123ad3;color:white;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 New Tag <b>+</b>
@@ -63,7 +63,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div style="display: flex;"><label for="fname"><b>Name :</b></label></div>
+                        <div style="display: flex;"><label for="fname"><b>Tag Name :</b></label></div>
                         <input class="modalinput" type="text" id="fname" name="firstname" placeholder="Your name.." v-model="name">
                     </div>
                     <div class="modal-footer">
@@ -104,6 +104,9 @@
 </template>
 
 <script setup>
+ import { useLoading } from 'vue3-loading-overlay';
+    // Import stylesheet
+    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import {inject} from 'vue'
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
@@ -159,40 +162,41 @@ const toaster = createToaster({ /* options */ });
         }
        const remove=(studentid) =>{
         
-                let user = localStorage.getItem("user");
+                  let user = localStorage.getItem("user");
                 user = JSON.parse(user)
                 let token = user.token
-                console.log(studentid);
-                axios.delete(`https://blog-api-dev.octalinfotech.com/api/tages/${studentid}/delete`, {
-                        'headers': {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    })
-                    .then((res) => {
-                        
-                        //   toaster.show(res.data.message, {
-                        //     type: "success",
-                        //     position: "top-right",
-                        // });
-                        
-                        console.log(res);
-                            getTags()
-                      
-                            swal.fire({
-                            icon: 'success',
-                            title: res.data.message,
-                            // text: 'Something went wrong!',
-                            // footer: '<a href="">Why do I have this issue?</a>'
-                            })
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
+            
+                swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure that you want to leave this page?",
+                icon: "warning",
+                dangerMode: true,
+                })
+                 .then((result) => {
+          if (result.isConfirmed) {
+            axios
+              .delete(`https://blog-api-dev.octalinfotech.com/api/tages/${studentid }/delete`,{
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then(() => {
+             swal.fire("Tag Deleted successfully!", "", "success");
+             getTags();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        });
 
 
         }
 
        const getTags = (page = 1) =>{
+         let loader = useLoading();
+    loader.show({ });
             if (page <= totalPage.value && page > 0) {
                 currentPage.value = page;
             } else if ( totalPage.value !== 1) {
@@ -212,7 +216,7 @@ const toaster = createToaster({ /* options */ });
                     data.value = res.data.data.data
                     user = res.data.data.data
                 })
-
+                loader.hide()
         }
       const  add=() =>{
             if (!name.value) {
@@ -232,8 +236,6 @@ const toaster = createToaster({ /* options */ });
 
                 })
                 .then((res) => {
-                    console.log(res);
-                     getTags()
                     toaster.show(res.data.message, {
                         type: "success",
                         position: "top-right",
@@ -243,16 +245,21 @@ const toaster = createToaster({ /* options */ });
                             title: res.data.message,
                             })
 
-                    this.getTags()
+                    // this.getTags()
+                        getTags()
                 })
                 .catch((error) => {
-                    console.log(error);
+                       toaster.show(error, {
+                        type: "error",
+                        position: "top-right",
+                    });
+                    // console.log(error);
                 })
 
         }
 
         onMounted(() => {
-            getTags()
+            getTags();
         })
        
     

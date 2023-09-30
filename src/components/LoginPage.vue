@@ -1,23 +1,26 @@
 <template>
-
-
   <section style="display: flex; justify-content: center">
     <div class="wrapper">
       <form action="">
-        <div class="space-y-4" style="display: flex;
-    justify-content: center;
-    align-items: center;">
-      <img
-        src="https://octalinfotech.com/img/octal-logo.png"
-        loading="lazy"
-        class="w-14 animate-bounce rounded-full"
-        alt="tailus logo"
-      />
-      <h2 class="mb-8 text-2xl text-cyan-900 font-bold">
-        Admin Login <br />
-        Login To Your Blog
-      </h2>
-    </div>
+        <h1 class="head">Octal infotech</h1>
+        <br />
+        <div
+          class="space-y-4"
+          style="display: flex; gap: 10%; justify-content: center"
+        >
+          <img
+            src="https://octalinfotech.com/img/octal-logo.png"
+            loading="lazy"
+            class="w-14 animate-bounce rounded-full"
+            alt="tailus logo"
+          />
+          <h2
+            class="text-lg font-bold text-cyan-900"
+            style="font-size: 21px; font-family: Georgia, serif"
+          >
+            Admin Login To Your Blog
+          </h2>
+        </div>
         <div class="input-box">
           <input
             v-model="Email"
@@ -152,6 +155,11 @@ const Login = () => {
 </script>
 
 <style scoped>
+.head {
+  color: #000000;
+  font-family: Georgia, serif;
+  text-shadow: 1px 1px 2px pink;
+}
 .wrapper {
   margin-top: 50px;
   width: 30%;
@@ -159,8 +167,8 @@ const Login = () => {
   color: #fff;
   border: 2px solid rgb(130, 52, 255);
   backdrop-filter: blur(100px);
-box-shadow: 12px 12px 2px 1px rgba(34, 34, 196, 0.226); 
- border-radius: 20px;
+  box-shadow: 12px 12px 17px 5px rgba(130, 130, 153, 0.685);
+  border-radius: 20px;
   padding: 30px 40px;
 }
 

@@ -10,14 +10,14 @@
       <ul class="menu-items">
         <li><a href="#Home">Home</a></li>
         <li><a href="#Category">Category</a></li>
-        <li><a href="#About">About</a></li>
         <li><a href="#Menu">Menu</a></li>
         <li><a href="#Testimonial">Testimonial</a></li>
         <li><a href="#Contact">Contact</a></li>
       </ul>
       <div class="head">
-       <img src="https://octalinfotech.com/img/octal-logo.png" loading="lazy" class="w-10 animate-bounce rounded-full" alt="tailus logo">
-        <h6><b class="text-3xl"> Octal infotech</b></h6>
+       <img src="https://octalinfotech.com/img/octal-logo.png" loading="lazy" class="w-10  rounded-full" alt="tailus logo">
+        <h6><b class="text-3xl" style="font-family: Georgia, serif;"> Octal infotech</b></h6>
+
       </div>
     </div>
   </nav>
@@ -72,12 +72,12 @@ export default {
   margin: auto;
 }
 .navbar {
-  box-shadow: 0px 10px 10px 0px #a7b7be;
+  box-shadow: 0px 10px 10px 0px #c8c8cc;
   position: fixed;
   width: 100%;
-  background: #e1e1e1;
+  background: #a3a3a363;
   color: #000;
-  opacity: 0.85;
+  opacity: 0.95;
   z-index: 100;
   padding: 7px;
 }
@@ -99,7 +99,6 @@ export default {
   font-size: 1.3rem;
 }
 .navbar a {
-  text-shadow: 1.5px 1.5px 2px #5697da;
   color: #000000;
   text-decoration: none;
   font-weight: 500;

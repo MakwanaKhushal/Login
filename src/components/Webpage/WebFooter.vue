@@ -29,7 +29,8 @@
                     <i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a><a href="#">
                    <i class="fa-brands fa-snapchat" style="color: #ffffff;"></i></a></div>
                 </div>
-                <p class="copyright">Company Name © 2018</p>
+                <br>
+                <a class="copyright" href="https://www.octalinfotech.com/" target="_blank">Octal infotech © 2018</a>
             </div>
         </footer>
     </div>

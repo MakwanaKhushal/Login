@@ -51,6 +51,12 @@ const routes = [
         component: () => import("./DeshBoard.vue"),
       },
       {
+        path: "/blogdetails/:id",
+        name: "BlogDetails",
+     
+        component: () => import("./BlogDetails.vue"),
+      },
+      {
         path: "blog",
         name: "Blog",
     

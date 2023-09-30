@@ -2,12 +2,14 @@
 <div class="d-flex  flex-column ">
     <!-- Button trigger modal -->
     <div>
+     
 
-        <div style="display: flex; justify-content: end;margin-right: 7%;">
+        <div style="display: flex; justify-content: space-between;margin-right: 7%;">
+             <div class="user">User</div>
             <button type="button" class="btn  mt-2 mb-3" style="background: #123ad3;color:white;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 New User <b>+</b>
             </button>
-
+            
         </div>
        
   <div>
@@ -16,7 +18,7 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col"> <b>User Name</b></th>
+                <th scope="col"> <b>User</b></th>
                 <th scope="col"><b>Email</b></th>
                 <th scope="col"><b>Action</b></th>
             </tr>
@@ -62,11 +64,11 @@
                     </div>
                     <div class="modal-body">
                         <div style="display: flex;"><label for="fname"><b>Name :</b></label></div>
-                        <input class="modalinput" type="text" id="fname" name="firstname" placeholder="Your name.." v-model="name">
+                        <input class="modalinput" type="text" id="fname" placeholder="Your name.." v-model="name">
                         <div style="display: flex;"><label for="fname"><b>Email :</b></label></div>
-                        <input class="modalinput" type="text" id="fname" name="firstname" placeholder="Your name.." v-model="email">
+                        <input class="modalinput" type="text" id="fname"  placeholder="Your name.." v-model="email">
                         <div style="display: flex;"><label for="fname"><b>password :</b></label></div>
-                        <input class="modalinput" type="text" id="fname" name="firstname" placeholder="Your name.." v-model="password">
+                        <input class="modalinput" type="text" id="fname" placeholder="Your name.." v-model="password">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 border border-blue-700 rounded-md" data-bs-dismiss="modal">Close</button>
@@ -115,6 +117,9 @@
 
 <script setup>
 import {inject} from 'vue'
+ import { useLoading } from 'vue3-loading-overlay';
+    // Import stylesheet
+    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
@@ -177,14 +182,13 @@ const toaster = createToaster({ /* options */ });
                 let user = localStorage.getItem("user");
                 user = JSON.parse(user)
                 let token = user.token
-                console.log(studentid);
             
-            swal.fire({
-  title: "Are you sure?",
-  text: "Are you sure that you want to leave this page?",
-  icon: "warning",
-  dangerMode: true,
-})
+                            swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure that you want to leave this page?",
+                icon: "warning",
+                dangerMode: true,
+                })
                  .then((result) => {
           if (result.isConfirmed) {
             axios
@@ -203,9 +207,11 @@ const toaster = createToaster({ /* options */ });
               });
           }
         });
-        }
+    }
 
        const getTags = (page = 1) =>{
+          let loader = useLoading();
+            loader.show({ });
             if (page <= totalPage.value && page > 0) {
                 currentPage.value = page;
             } else if ( totalPage.value !== 1) {
@@ -225,7 +231,7 @@ const toaster = createToaster({ /* options */ });
                     data.value = res.data.data.data
                     user = res.data.data.data
                 })
-
+                loader.hide()
         }
       const  add=() =>{
             if (!name.value) {
@@ -258,10 +264,13 @@ const toaster = createToaster({ /* options */ });
                             title: res.data.message,
                             })
 
-                    this.getTags()
                 })
                 .catch((error) => {
-                    console.log(error);
+                    toaster.show(error, {
+                        type: "success",
+                        position: "top-right",
+                    });
+                    // console.log(error);
                 })
 
         }
@@ -295,4 +304,16 @@ table {
     transform: translate(260px, 0px);
     border-collapse: collapse;
 }
+</style>
+<style scoped>
+  .user{
+        justify-content: start;
+    display: flex;
+    margin-left: 243px;
+    margin-top: 11px;
+  justify-content: start;
+  font-size: 27px;
+  font-weight: 800;
+  text-shadow: 0 0 2px;
+}  
 </style>

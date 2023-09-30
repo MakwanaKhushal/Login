@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- <button class="btn btn-danger mt-2" @click="add">CreatBlog</button> -->
-    <div class="CreatBlog d-flex">
+    <div class="CreatBlog ">
     
       <div style="margin-right: 890px; margin-top: 20px">
-        <h2><b class="text-3xl">Blogs</b></h2>
+        <h2><b class="text-3xl" style="     margin-right: 90px;  text-shadow: 0 0 2px; ">Blogs</b></h2>
       </div>
 
       <div>
@@ -34,7 +34,7 @@
             <th scope="col"><b>Title</b></th>
             <th scope="col" ><b>Name</b></th>
             <th scope="col"><b>Category</b></th>
-            <th scope="col" ><b>Description</b></th>
+            <!-- <th scope="col" ><b>Description</b></th> -->
             <th scope="col" ><b>Status</b></th>
             <th scope="col" ><b>Action</b></th>
           </tr>
@@ -52,9 +52,9 @@
               </td>
               <th>{{ data.title }}</th>
               <th>{{ data.category_name }}</th>
-              <td data-v-7394c81b="" class="text-xs text-gray-900 font-normal px-6 py-3 break-words truncate cell-breakword">
+              <!-- <td data-v-7394c81b="" class="text-xs text-gray-900 font-normal px-6 py-3 break-words truncate cell-breakword">
               <p v-html="data.description" ></p>
-              </td>
+              </td> -->
               <!-- <td></td> -->
               <td v-if="data.status == 0">
                 <button class="btn btn-info" @click="changeStatus(data.id)">
@@ -77,6 +77,10 @@
                   style="color: red"
                   @click="remove(data.id)"
                 ></i>
+                &nbsp;
+                <router-link :to="'/blogdetails/'+data.id">
+                <i class="fa-regular fa-eye fa-xl" style="color: #b3047;"></i>
+                </router-link>
               </td>
             </template>
           </tr>
@@ -97,6 +101,11 @@
 </template>
 
 <script setup>
+
+ import { useLoading } from 'vue3-loading-overlay';
+    // Import stylesheet
+    import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
 import { ref } from "vue";
@@ -112,14 +121,26 @@ const toaster = createToaster({
   /* options */
 });
 const selectedStatus = ref("");
+const detail = ref({})
 const details = ref({});
 const status = ref(["all", "Publish", "Unpublish"]);
 
-const getblog = () => {
+const getblog = async () => {
+   let loader = useLoading();
+    loader.show({ 
+        // Pass props by their camelCased names
+  color: 'red',
+  loader: 'Dots',
+  width: 75,
+  height: 75,
+  backgroundColor: '#ffffff',
+  opacity: 0.5,
+  zIndex: 999,
+    });
   let user = localStorage.getItem("user");
   user = JSON.parse(user);
   let token = user.token;
-  axios
+  await axios
     .get("https://blog-api-dev.octalinfotech.com/api/blogs?page=1&tag_id", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -132,6 +153,9 @@ const getblog = () => {
     .catch((error) => {
       console.log(error);
     });
+       setTimeout(() => {
+            loader.hide()
+          },300) 
 };
 
 const selectedBlog = (value) => {
@@ -168,7 +192,7 @@ const remove = async (blogid) => {
             }
           )
           .then((res) => {
-            swal.fire("Tag Deleted successfully!", "", "success");
+            swal.fire("blog delete successfully!", "", "success");
             // console.log(res);
             toaster.show(res.data.message, {
               type: "success",
@@ -236,6 +260,20 @@ const changeStatus = (blogid) => {
       });
   });
 };
+const blog = () => {
+  axios
+    .get("https://blog-api-dev.octalinfotech.com/blogs?page=1&search", {
+      headers: {
+        token: "7ELX2CnkfqWpipzXNB5QV9sxSf4dPk",
+      },
+    })
+    .then((res) => {
+      detail.value = res.data.data.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 const edit = (id) => {
   console.log(id);
@@ -247,6 +285,7 @@ const edit = (id) => {
 
 onMounted(() => {
   getblog();
+  blog();
 });
 </script>
 <style src="@vueform/multiselect/themes/default.css"></style>

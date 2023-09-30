@@ -1,25 +1,15 @@
 <template>
-<!-- ============================= -->
-<!-- <nav class="navbar navbar-expand-lg  bg-light p-0">
-    <div style="display: contents;">
-        <img src="https://octalinfotech.com/img/octal-logo.png" alt="" style="width: 2%; border-radius: 45px" />
-        <h5><b>OCTAL INFOTECH</b></h5>
-    </div>
-        &nbsp;&nbsp;
-    <div class="collapse navbar-collapse" style="background-color: #96b1bb;justify-content: end;">
-       
-    </div>
-</nav> -->
-        <!---->
+
         
 <nav class="navbar   bg-light p-1" style="position:fixed; width:100%;z-index: 999;box-shadow: 0px 0px 10px slategrey;  ">
 
   <div class="container-fluid">
-    <a class="navbar-brand" > <img src="https://octalinfotech.com/img/octal-logo.png" style="width: 40px;border-radius: 25px;" class="animate-bounce " >&nbsp;&nbsp;<b style="color: black;font-size: 25px;        text-shadow: 0px 0px 1px;">Octal infotech</b></a>
+    <a class="navbar-brand" > <img src="https://octalinfotech.com/img/octal-logo.png" style="width: 40px;border-radius: 10px;" >
+    &nbsp;&nbsp;<b style="" class="hadding">Octal infotech</b></a>
    
  
       <div class="nav-item dropdown">
-          <img   src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68" style="width:80%; border-radius: 50%;" class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
+          <img   src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68" style="width:80%; border-radius: 25px;" class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
             
           <ul style="border-radius: 10%;background: aliceblue;" class="dropdown-menu " aria-labelledby="navbarDropdown">
             <li>
@@ -46,34 +36,34 @@
 
 <!-- ========================== -->
 <div >
-    <div class="sidebar " style="background-color: gainsboro;box-shadow: 0px 0px 10px slategrey;  ">
+    <div class="sidebar" >
 
         <div class="side">
-            <div style="height: 50px">
+            <div style="height: 50px" class="box">
                 <router-link to="/admin/deshBoard" class="router-link" >
-                    <i class="fa-solid fa-house" style="color:#8400ff;"></i>&nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b>Dashbord</b></span>
-                </router-link>
-            </div>
-            <div style="height: 50px">
-                <router-link to="/admin/user" class="router-link" >
-                   <i class="fa-solid fa-user fa-lg" style="color: #ba405e;"></i>&nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b>Users</b></span>
+                    <i class="fa-solid fa-house" style="color:#8400ff;"></i>&nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b class="font">Dashbord</b></span>
                 </router-link>
             </div>
             <div style="height: 50px">
                 <router-link to="/admin/blog" class="router-link" >
-                    <i class="fa-solid fa-cube fa-lg" style="color: #324b76;"></i> &nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b>Blogs</b></span>
+                    <i class="fa-solid fa-cube fa-lg" style="color: #324b76;"></i> &nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b class="font">Blogs</b></span>
                 </router-link>
             </div>
 
             <div  style="height: 50px" >
                 <router-link to="/admin/tags" class="router-link" >
-                    <i class="fa-solid fa-tag fa- fa-xl" style="color: #009393;"></i> &nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b>Tags</b></span>
+                    <i class="fa-solid fa-tag fa- fa-xl" style="color: #009393;"></i> &nbsp;<span class="ms-1 d-none d-sm-inline"><b  class="font">Tags</b></span>
+                </router-link>
+            </div>
+            <div style="height: 50px">
+                <router-link to="/admin/user" class="router-link" >
+                   <i class="fa-solid fa-user fa-lg" style="color: #ba405e;"></i>&nbsp;&nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b class="font">Users</b></span>
                 </router-link>
             </div>
             <div  style="height: 50px" >
                 <router-link to="/admin/categories" class="router-link"  >
                     <i class="fa-solid fa-graduation-cap fa-lg" style="color:rgb(255 0 160 / 69%)"></i>&nbsp;&nbsp;
-                    <span class="ms-1 d-none d-sm-inline"><b>Categories</b></span>
+                    <span class="ms-1 d-none d-sm-inline"><b class="font">Categories</b></span>
                 </router-link>
             </div>
                    
@@ -114,6 +104,16 @@ export default {
 </script>
 
 <style scoped>
+.font{
+font-family: Georgia, serif;
+font-size: 16px;
+}
+.hadding{
+color: black;
+font-size: 25px;
+text-shadow: 0px 0px 0.5px ;
+font-family: Georgia, serif;
+}
 .dropdown-toggle{
         width: 50px;
     border-radius: 25px;
@@ -174,7 +174,7 @@ export default {
     position: sticky;
 }
 .bg-light {
-    background-color: #99b2b6!important;
+    background-color: #abc0c6!important;
 }
 .dropdown-menu[data-bs-popper] {
     top: 100%;
@@ -199,14 +199,12 @@ align-items: center;
     position: fixed;
     height: 100%;
     margin-top: -5px;
+    background-color: #acbec45e;
+    box-shadow: 1px 0px 15px slategrey;
 }
 
 .sidebar div {
     padding: 20px;
-}
-
-.sidebar div:focus:not(.active) {
-    color: rgb(255, 0, 157);
 }
 
 

@@ -130,13 +130,15 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted,inject } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 import moment from "moment";
 // const Joi = require("joi");
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ });
+const swal = inject("$swal");
+
 
 const User = ref([]);
 const tag = ref([]);
@@ -235,10 +237,12 @@ const creatblog = () => {
     })
     .then((res) => {
       console.log(res);
+      swal.fire("blog add successfully!", "", "success");
       toaster.show(res.data.message, {
         type: "success",
         position: "top-right",
       });
+    
     })
     .catch((err) => {
       console.log(err);
