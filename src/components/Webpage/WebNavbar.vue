@@ -75,7 +75,7 @@ export default {
   box-shadow: 0px 10px 10px 0px #c8c8cc;
   position: fixed;
   width: 100%;
-  background: #a3a3a363;
+  background: #9daeffad;
   color: #000;
   opacity: 0.95;
   z-index: 100;

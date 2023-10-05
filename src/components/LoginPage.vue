@@ -61,11 +61,14 @@
 import axios from "axios";
 import { ref } from "vue";
 import router from "./router";
-import { createToaster } from "@meforma/vue-toaster";
+// import { createToaster } from "@meforma/vue-toaster";
+import { useToast } from 'vue-toastification'
 
-const toaster = createToaster({
+const toast = useToast()
+
+// const toaster = createToaster({
   /* options */
-});
+// });
 
 const Email = ref("");
 const Password = ref("");
@@ -104,9 +107,8 @@ const Login = () => {
       console.log(response.data.message);
       localStorage.setItem("user", JSON.stringify(response.data.data));
 
-      toaster.show(response.data.message, {
-        type: "success",
-        position: "top-right",
+         toast.success(response.data.message, {
+        timeout: 4000
       });
       router.push({
         name: "Admin",
@@ -115,9 +117,8 @@ const Login = () => {
     .catch((err) => {
       console.log(err);
       console.log(err.response);
-      toaster.show(err.response.data.message, {
-        type: "error",
-        position: "top-right",
+       toast.e(err.response.data.message, {
+        timeout: 4000
       });
     });
 

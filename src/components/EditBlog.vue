@@ -145,6 +145,9 @@
 </template>
 
 <script setup>
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 import { VueEditor } from "vue3-editor";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -155,10 +158,10 @@ import moment from "moment";
 import { useRoute } from "vue-router";
 const route = useRoute();
 import { useRouter } from "vue-router";
-import { createToaster } from "@meforma/vue-toaster";
-const toaster = createToaster({
+// import { createToaster } from "@meforma/vue-toaster";
+// const toaster = createToaster({
   /* options */
-});
+// });
 const swal = inject("$swal");
 
 const router = useRouter();
@@ -306,9 +309,8 @@ const storeblog = () => {
     .then((res) => {
       console.log(res);
       swal.fire("blog update successfully!", "", "success");
-      toaster.show(res.data.message, {
-        type: "success",
-        position: "top-right",
+       toast.success(res.data.message, {
+        timeout: 4000
       });
     })
     .catch((error) => {

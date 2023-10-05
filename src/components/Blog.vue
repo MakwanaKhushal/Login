@@ -101,6 +101,10 @@
 </template>
 
 <script setup>
+// import { toast } from 'vue3-toastify';
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
  import { useLoading } from 'vue3-loading-overlay';
     // Import stylesheet
@@ -194,10 +198,9 @@ const remove = async (blogid) => {
           .then((res) => {
             swal.fire("blog delete successfully!", "", "success");
             // console.log(res);
-            toaster.show(res.data.message, {
-              type: "success",
-              position: "top-right",
-            });
+               toast.success(res.data.message, {
+        timeout: 4000
+      });
           });
         // getblog().catch((error) => {
         //   console.log(error);
@@ -327,11 +330,15 @@ word-break: break-all;
 }
 .green{
   background: rgb(210, 255, 210);
+      box-shadow: 6px 3px 8px;
+
 padding: 5px;
 border: 1px solid rgb(0, 255, 0);
 }
 .red{
   background: rgb(255, 211, 211);
+      box-shadow: 6px 3px 8px;
+
   padding: 5px;
 border: 1px solid rgb(255, 0, 0);
 

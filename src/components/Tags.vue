@@ -18,16 +18,18 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col"><b>id</b></th>
                 <th scope="col"><b>name</b></th>
+                <th scope="col"><b></b></th>
+                <th scope="col"><b></b></th>
                 <th scope="col"><b>Action</b></th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="api in data" :key="api">
                 <th scope="row"></th>
-                <td >{{api.id}}</td>
                 <td >{{api.name}}</td>
+                <td ></td>
+                <td ></td>
                 <td >
                     <i class="fa-solid fa-pen-to-square fa-xl pointer" style="color: blue;" data-bs-toggle="modal" data-bs-target="#exampleModal2" @click="update=api"></i>&nbsp;&nbsp;&nbsp;
                     <i class="fa-solid fa-trash fa-xl pointer" style="color: red;" @click="remove(api.id)"></i>
@@ -104,6 +106,9 @@
 </template>
 
 <script setup>
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
  import { useLoading } from 'vue3-loading-overlay';
     // Import stylesheet
     import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
@@ -236,10 +241,11 @@ const toaster = createToaster({ /* options */ });
 
                 })
                 .then((res) => {
-                    toaster.show(res.data.message, {
-                        type: "success",
-                        position: "top-right",
-                    });
+                    toast.success(res.data.message);
+                    // toaster.show(res.data.message, {
+                    //     type: "success",
+                    //     position: "top-right",
+                    // });
                        swal.fire({
                             icon: 'success',
                             title: res.data.message,

@@ -135,8 +135,11 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 import moment from "moment";
 // const Joi = require("joi");
-import { createToaster } from "@meforma/vue-toaster";
-const toaster = createToaster({ });
+// import { createToaster } from "@meforma/vue-toaster";
+// const toaster = createToaster({ });
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 const swal = inject("$swal");
 
 
@@ -238,9 +241,8 @@ const creatblog = () => {
     .then((res) => {
       console.log(res);
       swal.fire("blog add successfully!", "", "success");
-      toaster.show(res.data.message, {
-        type: "success",
-        position: "top-right",
+                  toast.success(res.data.message, {
+        timeout: 4000
       });
     
     })

@@ -189,7 +189,7 @@ const toaster = createToaster({ /* options */ });
                 icon: "warning",
                 dangerMode: true,
                 })
-                 .then((result) => {
+            .then((result) => {
           if (result.isConfirmed) {
             axios
               .delete(`https://blog-api-dev.octalinfotech.com/api/users/${studentid }/delete`,{
