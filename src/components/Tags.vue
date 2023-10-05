@@ -106,8 +106,11 @@
 </template>
 
 <script setup>
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+
+import { useToast } from 'vue-toastification'
+
+
+
 
  import { useLoading } from 'vue3-loading-overlay';
     // Import stylesheet
@@ -118,7 +121,7 @@ import { ref, onMounted } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
 
 const swal = inject('$swal')
-
+const toast = useToast()
 const toaster = createToaster({ /* options */ });
 
         const data = ref({});
@@ -186,9 +189,14 @@ const toaster = createToaster({ /* options */ });
                   },
                 }
               )
-              .then(() => {
+              .then((res) => {
              swal.fire("Tag Deleted successfully!", "", "success");
+                            toast.success(res.data.message, {
+        timeout: 4000
+      });
+             
              getTags();
+
               })
               .catch((err) => {
                 console.log(err);
