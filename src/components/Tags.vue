@@ -229,7 +229,9 @@ const toaster = createToaster({ /* options */ });
                     data.value = res.data.data.data
                     user = res.data.data.data
                 })
-                loader.hide()
+                setTimeout(() => {
+            loader.hide()
+          },300) 
         }
       const  add=() =>{
             if (!name.value) {

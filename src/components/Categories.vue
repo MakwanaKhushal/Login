@@ -183,7 +183,9 @@ export default {
                 }).catch((error) => {
                     console.log(error);
                 })
-                 loader.hide()
+                        setTimeout(() => {
+            loader.hide()
+          },150) 
         },
         add() {
             if (!this.name) {
