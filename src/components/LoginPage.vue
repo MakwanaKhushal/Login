@@ -58,6 +58,7 @@
 </template>
 
 <script setup>
+import store from '@/vuex/store'
 import axios from "axios";
 import { ref } from "vue";
 import router from "./router";
@@ -105,7 +106,8 @@ const Login = () => {
     })
     .then((response) => {
       console.log(response.data.message);
-      localStorage.setItem("user", JSON.stringify(response.data.data));
+      // localStorage.setItem("user", JSON.stringify(response.data.data));
+      store.commit('loginpage', response.data.data);
 
          toast.success(response.data.message, {
         timeout: 4000

@@ -18,7 +18,7 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col"><b>name</b></th>
+                <th scope="col"><b class="">name</b></th>
                 <th scope="col"><b></b></th>
                 <th scope="col"><b></b></th>
                 <th scope="col"><b>Action</b></th>
@@ -315,5 +315,7 @@ table {
   font-size: 27px;
   font-weight: 800;
   text-shadow: 0 0 2px;
+    font-family: "Sofia", sans-serif;
+
 }  
 </style>
