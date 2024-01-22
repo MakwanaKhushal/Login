@@ -1,90 +1,141 @@
 <template>
-
-        
-<nav class="navbar   bg-light p-1" style="position:fixed; width:100%;z-index: 999;box-shadow: 0px 0px 10px slategrey;  ">
-
-  <div class="container-fluid">
-    <a class="navbar-brand" > <img src="https://octalinfotech.com/img/octal-logo.png" style="width: 40px;border-radius: 10px;" >
-    &nbsp;&nbsp;<b style="" class="hadding">Octal infotech</b></a>
-   
- 
-      <div class="nav-item dropdown">
-          <img   src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68" style="width:80%; border-radius: 25px;" class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" />
-            
-          <ul style="border-radius: 10%;background: aliceblue;" class="dropdown-menu " aria-labelledby="navbarDropdown">
-            <li>
-                 <button type="button" class="btn btn-" data-bs-toggle="modal" data-bs-target="#myModal">
-                    Profile
-                </button>
-            </li>
-            <li>     
-                <button type="button" class="btn btn-" data-bs-toggle="modal" data-bs-target="#ChangePassworld">
-                    ChangePassworld
-                </button>
-            </li>
-            <li> 
-                <button type="button" class="btn btn-" @click="logout">
-                    logout
-                </button>
-            </li>
-          </ul>
-    </div>
-  </div>
-</nav>
-<br><br><br>
-
-
-<!-- ========================== -->
-<div >
-    <div class="sidebar" >
-
-        <div class="side">
-            <div style="height: 50px" class="box">
-                <router-link to="/admin/deshBoard" class="router-link" >
-                    <i class="fa-solid fa-house" style="color:#8400ff;"></i>&nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b class="font">Dashbord</b></span>
-                </router-link>
+    <nav class="fixed top-0 z-50 w-full bg-zinc-200		 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-2 py-2 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start rtl:justify-end">
+                    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+                        type="button"
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        <span class="sr-only">Open sidebar</span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                            </path>
+                        </svg>
+                    </button>
+                    <a href="https://flowbite.com" class="flex ms-2 md:me-24">
+                        <img src="http://octalinfotech.com/img/octal-logo.png" class="h-8 me-3 rounded-s-md"
+                            alt="FlowBite Logo" />
+                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Octal
+                            Infotech</span>
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center ms-3">
+                        <div>
+                            <button type="button"
+                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="w-12 h-12 rounded-full"
+                                    src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-d20d9928ef55-512"
+                                    alt="user photo" />
+                            </button>
+                        </div>
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                            id="dropdown-user">
+                            <ul class="py-1" role="none">
+                                <li>
+                                    <button type="button" class="btn btn-" data-bs-toggle="modal" data-bs-target="#myModal">
+                                        Profile
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-" data-bs-toggle="modal"
+                                        data-bs-target="#ChangePassworld">
+                                        ChangePassworld
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-" @click="logout">
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style="height: 50px">
-                <router-link to="/admin/blog" class="router-link" >
-                    <i class="fa-solid fa-cube fa-lg" style="color: #324b76;"></i> &nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b class="font">Blogs</b></span>
-                </router-link>
-            </div>
-
-            <div  style="height: 50px" >
-                <router-link to="/admin/tags" class="router-link" >
-                    <i class="fa-solid fa-tag fa- fa-xl" style="color: #009393;"></i> &nbsp;<span class="ms-1 d-none d-sm-inline"><b  class="font">Tags</b></span>
-                </router-link>
-            </div>
-            <div style="height: 50px">
-                <router-link to="/admin/user" class="router-link" >
-                   <i class="fa-solid fa-user fa-lg" style="color: #ba405e;"></i>&nbsp;&nbsp;&nbsp;<span class="ms-1 d-none d-sm-inline"><b class="font">Users</b></span>
-                </router-link>
-            </div>
-            <div  style="height: 50px" >
-                <router-link to="/admin/categories" class="router-link"  >
-                    <i class="fa-solid fa-graduation-cap fa-lg" style="color:rgb(255 0 160 / 69%)"></i>&nbsp;&nbsp;
-                    <span class="ms-1 d-none d-sm-inline"><b class="font">Categories</b></span>
-                </router-link>
-            </div>
-                   
         </div>
-    </div>
-    
-    <div>   
-        <router-view />
-    </div>
-</div>
-<Modal />
-  
+    </nav>
+
+    <aside id="logo-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-neutral-300		 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        aria-label="Sidebar">
+        <div class="h-full px-3 pb-4 overflow-y-auto bg-neutral-300		 dark:bg-gray-800">
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <router-link to="/admin/deshBoard" class="router-link">
+                            <i
+                                class="fa-solid fa-gauge fa-lg text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                            <span class="ms-3">Dashboard</span>
+                        </router-link>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <router-link to="/admin/blog" class="router-link">
+                            <i
+                                class="fa-solid fa-blog fa-lg text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                            <span class="ms-3">Blog</span>
+                        </router-link>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <router-link to="/admin/tags" class="router-link">
+                            <i
+                                class="fa-solid fa-tag fa-lg text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                            <span class="ms-3">Tags</span>
+                        </router-link>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <router-link to="/admin/user" class="router-link">
+                            <i
+                                class="fa-solid fa-user fa-lg text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                            <span class="ms-3">User</span>
+                        </router-link>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <router-link to="/admin/categories" class="router-link">
+                            <i
+                                class="fa-solid fa-list fa-lg text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                            <span class="ms-3">Categories</span>
+                        </router-link>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+
+        <div class="p-4 sm:ml-64">
+            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+                <router-view></router-view>
+             
+            </div>
+         </div>
+         <!-- -------------------------- -->
+    <Modal />
 </template>
 
 <script>
-
-import Modal from '@/components/Modal'
+import Modal from "@/components/Modal";
 export default {
     name: "SideBar",
     components: {
-        Modal
+        Modal,
     },
     data() {
         return {
@@ -103,135 +154,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.font{
-font-family: Georgia, serif;
-font-size: 16px;
-}
-.hadding{
-color: black;
-font-size: 25px;
-text-shadow: 0px 0px 0.5px ;
-font-family: Georgia, serif;
-}
-.dropdown-toggle{
-        width: 50px;
-    border-radius: 25px;
-}
-.dropbtn {
-    color: white;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-.router-link{
-    text-decoration: none;
-    color: black;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    margin-left: -100px;
-    background-color: #f9f9f9;
-    border-radius: 15px;
-    min-width: 100px;
-    box-shadow: 3px 3px 22px 4px rgba(0.5, 0.5, 0.5, 0.3);
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-}
-
-.dropdown-content div {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-
-</style>
-<style scoped>
-.side{
-        display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: baseline;
-}
-</style>
-
-<style scoped>
-.sticy {
-    position: -webkit-sticky;
-    position: sticky;
-}
-.bg-light {
-    background-color: #abc0c6!important;
-}
-.dropdown-menu[data-bs-popper] {
-    top: 100%;
-    left: 0;
-    margin-top: 1.125rem;
-    margin-left: -103px;
-}
-
-</style>
-
-<style scoped>
-
-.navbar-brand{
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.nav-link {
-    padding: 0px;
-}
-.sidebar {
-    position: fixed;
-    height: 100%;
-    margin-top: -5px;
-    background-color: #acbec45e;
-    box-shadow: 1px 0px 15px slategrey;
-}
-
-.sidebar div {
-    padding: 20px;
-}
-
-
-
-
-
-@media screen and (max-width: 700px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .sidebar div {
-        float: left;
-    }
-
-    div.content {
-        margin-left: 0;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .sidebar div {
-        text-align: center;
-        float: none;
-    }
-}
-
-</style>
+<style></style>

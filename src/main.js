@@ -14,6 +14,7 @@ import "vue-toastification/dist/index.css";
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import '../src/registerServiceWorker'
 
 createApp(App).use(Toaster).use(VueDatePicker).use(router).use(Toast).use(VueSweetalert2).mount('#app');
 

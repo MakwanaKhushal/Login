@@ -1,5 +1,5 @@
 <template>
-  <section style="display: flex; justify-content: center">
+  <!-- <section style="display: flex; justify-content: center">
     <div class="wrapper">
       <form action="">
         <h1 class="head">Octal infotech</h1>
@@ -54,21 +54,44 @@
         </div>
       </form>
     </div>
+  </section> -->
+
+  <section class="login-page">
+    <form>
+      <div class="box">
+        <div class="form-head">
+          <div class="flex justify-center pb-3 items-center space-x-4">
+            <img class="h-12 w-auto rounded-2xl" src="http://octalinfotech.com/img/octal-logo.png" alt="Your Company" />
+            <span class="font-bold text-2xl ">Octal Infotech</span>
+          </div>
+        </div>
+        <div class="form-body">
+          <input v-model="Email" type="text" placeholder="Email" @input="InputEvent1" />
+          <p style="color: red">{{ Error.Email }}</p>
+          <input v-model="Password" type="" placeholder="Password" @input="InputEvent2" />
+
+          <p style="color: red">{{ Error.Password }}</p>
+        </div>
+        <div class="form-footer">
+          <button type="submit" @click.prevent="Login">Log In</button>
+        </div>
+      </div>
+    </form>
   </section>
 </template>
 
 <script setup>
-import store from '@/vuex/store'
+import store from "@/vuex/store";
 import axios from "axios";
 import { ref } from "vue";
 import router from "./router";
 // import { createToaster } from "@meforma/vue-toaster";
-import { useToast } from 'vue-toastification'
+import { useToast } from "vue-toastification";
 
-const toast = useToast()
+const toast = useToast();
 
 // const toaster = createToaster({
-  /* options */
+/* options */
 // });
 
 const Email = ref("");
@@ -107,10 +130,10 @@ const Login = () => {
     .then((response) => {
       console.log(response.data.message);
       // localStorage.setItem("user", JSON.stringify(response.data.data));
-      store.commit('loginpage', response.data.data);
+      store.commit("loginpage", response.data.data);
 
-         toast.success(response.data.message, {
-        timeout: 4000
+      toast.success(response.data.message, {
+        timeout: 4000,
       });
       router.push({
         name: "Admin",
@@ -119,8 +142,8 @@ const Login = () => {
     .catch((err) => {
       console.log(err);
       console.log(err.response);
-       toast.e(err.response.data.message, {
-        timeout: 4000
+      toast.e(err.response.data.message, {
+        timeout: 4000,
       });
     });
 
@@ -158,115 +181,93 @@ const Login = () => {
 </script>
 
 <style scoped>
-.head {
-  color: #000000;
-  font-family: Georgia, serif;
-  text-shadow: 1px 1px 2px pink;
-}
-.wrapper {
-  margin-top: 50px;
-  width: 30%;
-  background: aliceblue;
-  color: #fff;
-  border: 2px solid rgb(130, 52, 255);
-  backdrop-filter: blur(100px);
-  box-shadow: 12px 12px 17px 5px rgba(130, 130, 153, 0.685);
-  border-radius: 20px;
-  padding: 30px 40px;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
-.wrapper h1 {
-  font-size: 36px;
-  text-align: center;
+* {
+  box-sizing: border-box;
+  outline: none !important;
 }
 
-.wrapper .input-box {
+.login-page {
+  background-image: url("https://image.divscode.com/login-bg.jpg");
+  background-size: cover;
+  height: 100vh;
   position: relative;
-  width: 100%;
-  height: 50;
-  margin: 30px 0;
 }
 
-.input-box input {
-  width: 100%;
-  color: black;
-  height: 100%;
-  background: transparent;
-  outline: none;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  font-size: 16px;
-  padding: 20px 45px 20px 20px;
-}
-
-.input-box input::placeholder {
-  color: black;
-}
-
-.input-box i {
+.login-page:after {
+  content: "";
   position: absolute;
-  right: 30px;
-  top: 30px;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: black;
-}
-
-.wrapper .remember-forget {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14.5px;
-  margin: -15px 0 15px;
-}
-
-.remember-forget {
-  accent-color: #fff;
-  margin-right: 3px;
-}
-
-.remember-forget label {
-  color: #000000;
-}
-
-.remember-forget a {
-  color: #000000;
-  text-decoration: none;
-}
-
-.remember-forget a :hover {
-  text-decoration: underline;
-}
-
-.wrapper .btn {
+  left: 0px;
+  top: 0px;
+  height: 100%;
   width: 100%;
-  height: 45px;
-  background: #555555;
-  border: none;
-  outline: none;
-  border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  font-size: 16px;
-  color: #ffffff;
-  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
-.wrapper .register-link {
-  font-size: 14.5px;
+.login-page .box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  z-index: 2;
+}
+
+.login-page .box .form-head h2 {
   text-align: center;
-  margin: 20px 0 15px;
+  margin: 10px 0px 20px;
+  color: #ffffff;
 }
 
-.register-link p {
-  color: #000000;
+.login-page .box .form-body {
+  display: flex;
+  flex-direction: column;
 }
 
-.register-link p a {
-  color: #000000;
-  text-decoration: none;
-  font-weight: 600;
+.login-page .box .form-body input {
+  height: 40px;
+  margin-bottom: 20px;
+  border: 1px solid #ffffff;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  text-align: center;
+  color: #ffffff;
+  transition: box-shadow 0.5s ease;
 }
 
-.register-link {
-  text-decoration: none;
+.login-page .box .form-body input:focus {
+  box-shadow: 0px 0px 10px black;
+}
+
+.login-page .box .form-body input::placeholder {
+  color: #ffffff;
+}
+
+.login-page .box .form-footer {
+  text-align: center;
+}
+
+.login-page .box .form-footer button {
+  height: 40px;
+  border-radius: 20px;
+  padding: 0px 50px;
+  color: #ffffff;
+  background-color: #f44336;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.5s ease;
+}
+
+.login-page .box .form-footer button:hover {
+  box-shadow: 0px 0px 10px black;
 }
 </style>

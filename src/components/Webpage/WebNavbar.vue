@@ -196,7 +196,7 @@ export default {
     transform: scaleY(0);
   }
   .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
-    transform: rotate(-45deg);
+    transform: rotate(-45deg);  
   }
 }
 @media (max-width: 500px) {
