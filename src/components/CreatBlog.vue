@@ -1,46 +1,30 @@
 <template>
   <div style="display: flex; justify-content: center">
     <div class="container" style="margin-top: 50px">
-      <h1 class="form-title">New Blog</h1>
+      <div class="flex justify-between items-center">
+        <h2 class="font-semibold leading-7 text-gray-900 form-title">New Blog</h2><a href="/admin/blog" class=""><router-link  to="/admin/blog"><button
+          type="button"
+          class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 capitalize tracking-wide shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">Back</button></router-link>
+          </a>
+      </div>
 
       <form class="was-validated">
         <div class="main-user-info">
           <div class="user-input-box">
             <label for="fullName">Title<span style="color: red">*</span></label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              placeholder="Enter Full Name"
-              @input="slugifytitle"
-              v-model="Title"
-              required
-            />
+            <input type="text" id="fullName" name="fullName" placeholder="Enter Full Name" @input="slugifytitle"
+              v-model="Title" required />
             <h5 class="Error">{{ errors.title }}</h5>
           </div>
           <div class="user-input-box">
             <label for="username">Slug<span style="color: red">*</span></label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Enter Username"
-              v-model="Slug"
-              required
-            />
+            <input type="text" id="username" name="username" placeholder="Enter Username" v-model="Slug" required />
             <h5 class="Error">{{ errors.slug }}</h5>
           </div>
           <div class="user-input-box">
             <label for="email">User<span style="color: red">*</span></label>
-            <Multiselect
-              style="margin-left: 0; width: 564px;"
-              v-model="User"
-              :options="useroptions"
-              placeholder="select opation"
-              :closeOnSelect="true"
-              :clearOnSelect="true"
-              class="w-[11rem]"
-            >
+            <Multiselect style="margin-left: 0; width: 564px;" v-model="User" :options="useroptions"
+              placeholder="select opation" :closeOnSelect="true" :clearOnSelect="true" class="w-[11rem]">
             </Multiselect>
             &nbsp;
             <h5 class="Error">{{ errors.user_id }}</h5>
@@ -48,70 +32,42 @@
 
           <div class="user-input-box">
             <label for="phoneNumber">Tag<span style="color: red">*</span></label>
-            <Multiselect
-              style="margin-left: 22px; width: 564px; "
-              v-model="tag"
-              object
-              :options="tagoptions"
-              placeholder="select opation"
-              :closeOnSelect="true"
-              :clearOnSelect="true"
-              :searchable="true"
-              mode="tags"
-              :multiple="true"
-              class="w-[11rem]"
-            >
-            </Multiselect
-            >&nbsp;
+            <Multiselect style="margin-left: 22px; width: 564px; " v-model="tag" object :options="tagoptions"
+              placeholder="select opation" :closeOnSelect="true" :clearOnSelect="true" :searchable="true" mode="tags"
+              :multiple="true" class="w-[11rem]">
+            </Multiselect>&nbsp;
             <h5 class="Error">{{ errors.tag_id }}</h5>
           </div>
           <div class="user-input-box">
             <label for="password">Categories<span style="color: red">*</span></label>
-            <Multiselect
-              v-model="categore"
-              :options="categoreoptions"
-              placeholder="select opation"
-              :closeOnSelect="true"
-              :clearOnSelect="true"
-              class="w-[11rem]"
-            >
+            <Multiselect v-model="categore" :options="categoreoptions" placeholder="select opation" :closeOnSelect="true"
+              :clearOnSelect="true" class="w-[11rem]">
             </Multiselect>
             <h5 class="Error">{{ errors.category_id }}</h5>
           </div>
           <div class="user-input-box">
-            <label for="confirmPassword"
-              >Date<span style="color: red">*</span></label
-            >
+            <label for="confirmPassword">Date<span style="color: red">*</span></label>
             <VueDatePicker v-model="date" style="width: 569px"></VueDatePicker>
             <h5 class="Error">{{ errors.date }}</h5>
           </div>
           <div class="user-input-box">
             <label for="password">Status<span style="color: red">*</span></label>
-            <input
-              type="text"
-              id="password"
-              name="password"
-              v-model="status"
-            />
+            <input type="text" id="password" name="password" v-model="status" />
             <h5 class="Error">{{ errors.status }}</h5>
           </div>
           <div class="user-input-box">
             <label for="password">Image<span style="color: red">*</span></label>
 
-            <input
-              type="file"
-           
-              @change="addImage"
-            />
+            <input type="file" @change="addImage" />
           </div>
           <div class="user-input-box" style="display: contents">
-            <label for="Description"
-              >Description<span class="star">*</span></label>
-            <vue-editor id="editor" useCustomImageHandler @image-added="handleImageAdded" v-model="textarea"  style="width: 100%;"></vue-editor>
-            <h4 class="error" >{{error?.textarea }}</h4>
+            <label for="Description">Description<span class="star">*</span></label>
+            <vue-editor id="editor" useCustomImageHandler @image-added="handleImageAdded" v-model="textarea"
+              style="width: 100%;"></vue-editor>
+            <h4 class="error">{{ error?.textarea }}</h4>
           </div>
-                
-            </div>
+
+        </div>
 
         <div class="form-submit-btn">
           <button class="btn btn-info" @click.prevent="creatblog">Save</button>
@@ -130,7 +86,7 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
-import { ref, onMounted,inject } from "vue";
+import { ref, onMounted, inject } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 import moment from "moment";
@@ -176,61 +132,62 @@ const addImage = (evt) => {
 };
 
 
-      function slugify(str) {
-        return String(str)
-          .normalize('NFKD') // split accented characters into their base characters and diacritical marks
-          .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
-          .trim() // trim leading or trailing whitespace
-          .toLowerCase() // convert to lowercase
-          .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
-          .replace(/\s+/g, '-') // replace spaces with hyphens
-          .replace(/-+/g, '-'); // remove consecutive hyphens
-      }
+function slugify(str) {
+  return String(str)
+    .normalize('NFKD') // split accented characters into their base characters and diacritical marks
+    .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+    .trim() // trim leading or trailing whitespace
+    .toLowerCase() // convert to lowercase
+    .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+    .replace(/-+/g, '-'); // remove consecutive hyphens
+}
 
-    const slugifytitle=(event)=>{
-      Slug.value = slugify(event.target.value)
-      
+const slugifytitle = (event) => {
+  Slug.value = slugify(event.target.value)
 
-    }
+
+}
 const creatblog = () => {
- 
-      //   const schema = Joi.object({
-      //   title: Joi.string().trim().required().max(100).label('Title'),
-      //   slug: Joi.string().trim().required().max(100).label('Slug'),
-      //   user_id: Joi.number().required().label('User'),
-      //   tag_id: Joi.string().required().label('Tag'),
-      //   category_id: Joi.number().required().label('Categories'),
-      //   description: Joi.string().trim().required().max(100).label('Description'),
-      //   status: Joi.string().trim().required().max(100).label('status'),
-      //   });
-      //       const { error } = schema.validate(data.value, {
-      //        abortEarly: false,
-      //         allowUnknown: true,
-      //           });
-      //     errors.value = {};
-      //       error.details?.forEach((element) => {
-      //       errors.value[element.path[0]] = element.message;
-      //     });
 
-      // if(error.details) return false;
+  //   const schema = Joi.object({
+  //   title: Joi.string().trim().required().max(100).label('Title'),
+  //   slug: Joi.string().trim().required().max(100).label('Slug'),
+  //   user_id: Joi.number().required().label('User'),
+  //   tag_id: Joi.string().required().label('Tag'),
+  //   category_id: Joi.number().required().label('Categories'),
+  //   description: Joi.string().trim().required().max(100).label('Description'),
+  //   status: Joi.string().trim().required().max(100).label('status'),
+  //   });
+  //       const { error } = schema.validate(data.value, {
+  //        abortEarly: false,
+  //         allowUnknown: true,
+  //           });
+  //     errors.value = {};
+  //       error.details?.forEach((element) => {
+  //       errors.value[element.path[0]] = element.message;
+  //     });
+
+  // if(error.details) return false;
 
 
-          let user = localStorage.getItem("user");
-          user = JSON.parse(user);
-          let token = user.token;
-          console.log(token);
-          date.value = moment(date.value).format("YYYY-MM-DD");
-          let formData = new FormData();
-          formData.append("title", Title.value);
-          formData.append("Slug", Slug.value);
-          formData.append("user_id", User.value);
-          tag.value.forEach((tag, index) => {
-          formData.append(`tag_ids[${index}]`, tag.value);});
-          formData.append("category_id", categore.value);
-          formData.append("date", date.value);
-          formData.append("description", textarea.value);
-          formData.append("status", status.value);
-          formData.append("image", files.value);
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  let token = user.token;
+  console.log(token);
+  date.value = moment(date.value).format("YYYY-MM-DD");
+  let formData = new FormData();
+  formData.append("title", Title.value);
+  formData.append("Slug", Slug.value);
+  formData.append("user_id", User.value);
+  tag.value.forEach((tag, index) => {
+    formData.append(`tag_ids[${index}]`, tag.value);
+  });
+  formData.append("category_id", categore.value);
+  formData.append("date", date.value);
+  formData.append("description", textarea.value);
+  formData.append("status", status.value);
+  formData.append("image", files.value);
 
   axios
     .post("https://blog-api-dev.octalinfotech.com/api/blogs/store", formData, {
@@ -241,15 +198,15 @@ const creatblog = () => {
     .then((res) => {
       console.log(res);
       swal.fire("blog add successfully!", "", "success");
-                  toast.success(res.data.message, {
+      toast.success(res.data.message, {
         timeout: 4000
       });
-    
+
     })
     .catch((err) => {
       console.log(err);
     });
-      router.push({name: "Blog"});
+  router.push({ name: "Blog" });
 };
 
 const getTags = () => {
@@ -334,12 +291,12 @@ onMounted(() => {
 .container {
   width: 100%;
   max-width: 65%;
-  background-color: rgb(0, 37, 85);
-    background-image: linear-gradient(rgb(212, 223, 255), rgb(255, 226, 250));
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgb(221, 221, 221), rgb(143, 143, 143));
   padding: 28px;
   margin: 0 28px;
   border-radius: 10px;
-  box-shadow: inset 0px 0px 5px rgb(0, 0, 0);
+
   background-repeat: no-repeat;
 }
 
@@ -353,9 +310,11 @@ onMounted(() => {
   border-bottom: solid 1px white;
   display: flex;
 }
-.Error{
+
+.Error {
   color: red;
 }
+
 .main-user-info {
   display: flex;
   flex-wrap: wrap;
@@ -481,5 +440,4 @@ onMounted(() => {
   .main-user-info::-webkit-scrollbar {
     width: 0;
   }
-}
-</style>
+}</style>

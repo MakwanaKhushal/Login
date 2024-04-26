@@ -1,6 +1,6 @@
 export default function Auth({next}){
     let login = localStorage.getItem('user')
-    console.log(login);
+    // console.log(login);
        if (login){
            return next();
     

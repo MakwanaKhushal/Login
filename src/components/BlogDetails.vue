@@ -5,7 +5,7 @@
     <div >
           <div style="display: flex;flex-direction: column;justify-content: center; align-items: flex-start;">
             <router-link to="/admin/blog" class="d-flex" style="    align-items: baseline;">
-                <i class="fa-solid fa-house" @click="backBlog"></i> 
+                <i class="fa-solid fa-house" ></i> 
                 &nbsp;<pre> <b>></b> </pre>
                 <b>{{detail.category_name}}</b>
             </router-link>
@@ -59,15 +59,15 @@ const detail = ref([]);
 const blog = () => {
   // let loader = useLoading();
   //   loader.show({ });
-  axios.get(`https://blog-api-dev.octalinfotech.com/blogs/${route.params.id}/show`, {
+  axios.get(`https://blog-api-dev.octalinfotech.com/api/blogs/${route.params.id}/show`, {
       headers: {
         token: "7ELX2CnkfqWpipzXNB5QV9sxSf4dPk",
       },
     })
     .then((res) => {
       console.log(res);
-      console.log(res.data.data);
-      detail.value = res.data.data
+      console.log(res.data.data.data);
+      detail.value = res.data.data.blog
     })
     .catch((err) => {
       console.log(err);

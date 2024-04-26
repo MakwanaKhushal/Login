@@ -23,6 +23,24 @@ const routes = [
  
     component: () => import('@/components/Webpage/BlogShow'),
   },
+  {
+    path: "/relatedblogshow/:id",
+    name: "RelatedBlogshow",
+ 
+    component: () => import('@/components/Webpage/RelatedBlogshow'),
+  },
+  {
+    path: "/categorieshow/:id",
+    name: "CategorieShow",
+ 
+    component: () => import('../components/Webpage/CategorieShow.vue'),
+  },
+  {
+    path: "/contactsuspage",
+    name: "ContactsusPage",
+ 
+    component: () => import('@/components/Webpage/ContactsusPage.vue'),
+  },
 
 
   
@@ -73,6 +91,12 @@ const routes = [
         name: "Tags",
       
         component: () => import("@/components/Tags.vue"),
+      },
+      {
+        path: "contact-us",
+        name: "Contact-us",
+      
+        component: () => import("@/components/Contacts.vue"),
       },
   
       {

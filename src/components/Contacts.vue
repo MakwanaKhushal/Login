@@ -1,7 +1,32 @@
 <template>
- 
-    <div class="flex gap-5 flex-wrap lg:justify-between md:justify-between justify-center items-center">
-        <div>
+    <!-- <div class="row">
+        <div class="col user">contacts</div>
+        <div class="col user2">
+            <button type="button"  class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                New contact <b>+</b>
+            </button>
+            <div  class="flex  flex-wrap justify-between items-center">
+                <div >
+                    <div
+                        class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-slate-100 overflow-hidden">
+                        <div class="grid place-items-center h-full w-12"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true" class="h-5 text-gray-300">
+                                <path fill-rule="evenodd"
+                                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                    clip-rule="evenodd"></path>
+                            </svg></div><input
+                            class="peer h-full w-full outline-none text-sm bg-slate-100 text-gray-700 bg-s pr-2 border-none"
+                            type="text" id="search" placeholder="Search something..">
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+   -->
+    <div  class="flex gap-2 flex-wrap justify-between items-center">
+        <div >
             <div
                 class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-slate-100 overflow-hidden">
                 <div class="grid place-items-center h-full w-12"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -13,11 +38,7 @@
                     class="peer h-full w-full outline-none text-sm bg-slate-100 text-gray-700 bg-s pr-2 border-none"
                     type="text" id="search" placeholder="Search something..">
             </div>
-        </div><button type="button"
-        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-        data-bs-toggle="modal" data-bs-target="#exampleModal">
-        New user <b>+</b>
-    </button>
+        </div>
     </div>
     <br>
     <!-- ======================================================================= -->
@@ -25,12 +46,13 @@
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">User</th>
+                    <th scope="col" class="px-6 py-3">name</th>
                     <th scope="col" class="px-6 py-3">Email</th>
-                    <th scope="col" class="px-6 py-3">Action</th>
+                    <th scope="col" class="px-6 py-3">Message</th>
+                    <!-- <th scope="col" class="px-6 py-3">Action</th> -->
                 </tr>
             </thead>
-            <tbody  v-if="data && data.length>0">
+            <tbody v-if="data && data.length>0">
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-for="api in data" :key="api">
                     <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ api.name }}
@@ -38,11 +60,14 @@
                     <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ api.email }}
                     </th>
-                    <td class="px-6 py-4">
+                    <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ api.message }}
+                    </th>
+                    <!-- <td class="px-6 py-4">
                         <i class="fa-solid fa-pen-to-square fa-xl pointer" style="color: blue" data-bs-toggle="modal"
                             data-bs-target="#exampleModal2" @click="update = api"></i>&nbsp;&nbsp;&nbsp;
                         <i class="fa-solid fa-trash fa-xl pointer" style="color: red" @click="remove(api.id)"></i>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
             <tbody v-else>
@@ -57,15 +82,15 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link style" href="#" @click.prevent="getTags(currentPage - 1)">Previous</a>
+                    <a class="page-link style" href="#" @click.prevent="getcontact(currentPage - 1)">Previous</a>
                 </li>
                 <li class="page-item" v-for="page in totalPage" :key="page">
-                    <a class="page-link color" href="#" @click.prevent="getTags(page)">{{
+                    <a class="page-link color" href="#" @click.prevent="getcontact(page)">{{
                         page
                     }}</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link style" href="#" @click.prevent="getTags(currentPage + 1)">
+                    <a class="page-link style" href="#" @click.prevent="getcontact(currentPage + 1)">
                         Next</a>
                 </li>
             </ul>
@@ -183,6 +208,7 @@ const toaster = createToaster({
     /* options */
 });
 
+// const search = ref({});
 const data = ref({});
 const name = ref("");
 // const page = ref('');
@@ -206,7 +232,7 @@ const edit = () => {
 
     axios
         .post(
-            `https://blog-api-dev.octalinfotech.com/api/users/${update.value.id}/update`,
+            `https://blog-api-dev.octalinfotech.com/api/contact-us/${update.value.id}/update`,
             data,
             {
                 headers: {
@@ -216,7 +242,7 @@ const edit = () => {
         )
         .then((res) => {
             console.log(res);
-            getTags();
+            getcontact();
             toaster.show(res.data.message, {
                 type: "success",
                 position: "top-right",
@@ -231,41 +257,41 @@ const edit = () => {
             console.log(error);
         });
 };
-const remove = (studentid) => {
-    let user = localStorage.getItem("user");
-    user = JSON.parse(user);
-    let token = user.token;
+// const remove = (studentid) => {
+//     let user = localStorage.getItem("user");
+//     user = JSON.parse(user);
+//     let token = user.token;
 
-    swal
-        .fire({
-            title: "Are you sure?",
-            text: "Are you sure that you want to leave this page?",
-            icon: "warning",
-            dangerMode: true,
-        })
-        .then((result) => {
-            if (result.isConfirmed) {
-                axios
-                    .delete(
-                        `https://blog-api-dev.octalinfotech.com/api/users/${studentid}/delete`,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`,
-                            },
-                        }
-                    )
-                    .then(() => {
-                        swal.fire("Tag Deleted successfully!", "", "success");
-                        getTags();
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-        });
-};
+//     swal
+//         .fire({
+//             title: "Are you sure?",
+//             text: "Are you sure that you want to leave this page?",
+//             icon: "warning",
+//             dangerMode: true,
+//         })
+//         .then((result) => {
+//             if (result.isConfirmed) {
+//                 axios
+//                     .delete(
+//                         `https://blog-api-dev.octalinfotech.com/api/contact-us/${studentid}/delete`,
+//                         {
+//                             headers: {
+//                                 Authorization: `Bearer ${token}`,
+//                             },
+//                         }
+//                     )
+//                     .then(() => {
+//                         swal.fire("Tag Deleted successfully!", "", "success");
+//                         getTags();
+//                     })
+//                     .catch((err) => {
+//                         console.log(err);
+//                     });
+//             }
+//         });
+// };
 
-const getTags = (page = 1) => {
+const getcontact = (page = 1 ) => {
     let loader = useLoading();
     loader.show({});
     if (page <= totalPage.value && page > 0) {
@@ -278,12 +304,13 @@ const getTags = (page = 1) => {
     user = JSON.parse(user);
     let token = user.token;
     axios
-        .get("https://blog-api-dev.octalinfotech.com/api/users?page=" + page, {
+        .get(`https://blog-api-dev.octalinfotech.com/api/contact-us/index?page=${page}&per_page=10&search=`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
         .then((res) => {
+            console.log(res);
             totalPage.value = res.data.data.last_page;
             data.value = res.data.data.data;
             user = res.data.data.data;
@@ -303,14 +330,14 @@ const add = () => {
     user = JSON.parse(user);
     let token = user.token;
     axios
-        .post("https://blog-api-dev.octalinfotech.com/api/users/store", data, {
+        .post("https://blog-api-dev.octalinfotech.com/api/contact-us/store", data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
         .then((res) => {
             console.log(res);
-            getTags();
+            getcontact();
             toaster.show(res.data.message, {
                 type: "success",
                 position: "top-right",
@@ -330,7 +357,7 @@ const add = () => {
 };
 
 onMounted(() => {
-    getTags();
+    getcontact();
 });
 </script>
 

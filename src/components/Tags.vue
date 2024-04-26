@@ -1,20 +1,10 @@
 <template>
-    <div class="row">
-        <div class="col user">
-            Tags
-        </div>
-        <div class="col user2">
-            <button type="button"  class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
-            New Tag <b>+</b>
-        </button>
-        </div>
-      </div>
-    <div class="d-flex flex-column">
-     
-        
 
-     
+    <div class="d-flex flex-column">
+
+
+
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -86,7 +76,26 @@
             </div>
         </div>
     </div>
-
+    <div class="flex gap-5 flex-wrap lg:justify-between md:justify-between justify-center items-center">
+        <div>
+            <div
+                class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-slate-100 overflow-hidden">
+                <div class="grid place-items-center h-full w-12"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor" aria-hidden="true" class="h-5 text-gray-300">
+                        <path fill-rule="evenodd"
+                            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                            clip-rule="evenodd"></path>
+                    </svg></div><input
+                    class="peer h-full w-full outline-none text-sm bg-slate-100 text-gray-700 bg-s pr-2 border-none"
+                    type="text" id="search" placeholder="Search something..">
+            </div>
+        </div><button type="button"
+        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+        data-bs-toggle="modal" data-bs-target="#exampleModal">
+        New Tag <b>+</b>
+    </button>
+    </div>
+    <br>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -96,7 +105,7 @@
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="data && data.length > 0 ">
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-for="api in data" :key="api">
                     <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ api.name }}
@@ -109,10 +118,15 @@
                     </td>
                 </tr>
             </tbody>
+            <tbody v-else>
+                <tr>
+                    <td colspan="11" class="text-center min-w-full h-12 text-2xl font-semibold">No matching records found</td>
+                </tr>
+            </tbody>
         </table>
     </div>
     <br>
-    <div style="display: flex; justify-content: end; margin-right: 50px margin-top: 50px">
+    <div style="display: flex; justify-content: end; margin-right: 50px ;margin-top: 50px;">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
@@ -319,18 +333,14 @@ onMounted(() => {
 
 .modal-content {
     border-radius: 20px;
-}
+}</style>
+<style scoped>.user {
 
-
-</style>
-<style scoped>
-.user {
-  
     display: flex;
     text-shadow: 0 0 1px;
     font-size: xx-large;
 }
-.user2{
+
+.user2 {
     display: contents;
-}
-</style>
+}</style>

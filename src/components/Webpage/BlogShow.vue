@@ -17,17 +17,13 @@
         </router-link>
         <br />
         <h1 class="text-4xl">
-          <b>{{ detail.title }}</b>
+          <b>{{ detail.category_name }}</b>
         </h1>
         <br />
-        <p class="description">
-          by &nbsp;&nbsp;
-          <img src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68"
-            style="width: 50px; border-radius: 100%" />
-          &nbsp;&nbsp;<b>{{ detail.user_name }}</b> &nbsp;&nbsp;<i>{{
-            detail.date
-          }}</i>
-        </p>
+        <p class="inline-flex items-center gap-3">By<img class="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+            src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68"> {{ detail.user_name }}<span
+            class="taghover text-sm text-gray-400 cursor-pointer">{{ detail.date }}
+          </span></p>
       </div>
 
       <div>
@@ -46,57 +42,48 @@
           </button>
         </div>
         <br />
-        <div class="detail">
+        <div style="display: flex;">
           <img :src="detail.image" style="width: 700px; height: 600px" />
           <p class="text-2xl" style="
               display: flex;
               flex-direction: column;
               justify-content: center;
               align-items: baseline;
-              margin-bottom: 300px;
+       
             " v-html="detail.description"></p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <br />
 
-  <section class="bg-white dark:bg-gray-900" id="Testimonial">
-    <div id="carouselExampleControls" class="carousel slide text-center carousel-dark" data-mdb-ride="carousel"
-      style="width: 65%; margin-left: 371px; margin-top: 100px">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="rounded-circle shadow-1-strong mb-4" src="http://octalinfotech.com/img/octal-logo.png" alt="avatar"
-            style="width: 150px; margin-left: 535px" />
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-8">
-              <h5 class="mb-3" style="font-size: 25px; font-weight: 700">
-                Ajay Makwana
-              </h5>
-              <p style="font-size: 20px; font-weight: 500">Octal Infotech</p>
-              <p class="text-muted">
-                <i class="fas fa-quote-left pe-2"></i>
-                One-stop solution for a wide range of web development services.
-                Fully customized and responsive websites - world class solutions
-                to our valued customers. Experise at fullscale, personalized -
-                unlocking endless possibilities. Shopify and Shopify Plus
-                development is Octal Infotech's specialty.We have a top team of
-                ecommerce web developers.
-              </p>
-            </div>
-          </div>
-          <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-            <li><i class="fas fa-star fa-sm"></i></li>
-            <li><i class="fas fa-star fa-sm"></i></li>
-            <li><i class="fas fa-star fa-sm"></i></li>
-            <li><i class="fas fa-star fa-sm"></i></li>
-            <li><i class="far fa-star fa-sm"></i></li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
-  <br /><br /><br /><br />
+
+  <br><br><br><br>
+  <h1 class="text-3xl	underline hover:underline-offset-8">Related Post</h1>
+  <br>
+  <section class="grid grid-cols-1 gap-10 sm:grid-cols-3 lg:grid-cols-3 container h-  " id="Menu">
+
+    <div v-for="blog in detail2" :key="blog" class="transition-all duration-700 hover:scale-110 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <router-link :to="'/relatedblogshow/' + blog.id ">
+        <img :src="blog.image"  />
+      </router-link>
+      <div class="p-5">
+          <a href="#">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ blog.title }}</h5>
+          </a>
+          <p v-html="blog.description.length > 50 ? blog.description.substring(0, 60) + '...' : blog.description" class="mb-3 font-normal text-gray-700 dark:text-gray-400"></p>
+          <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <div class="flex items-center gap-2">
+              <img src="https://ca.slack-edge.com/T04HNPJ1PV3-U04HWPFL198-417360c899fd-68" alt=""
+                class="h-10 w-10 flex-shrink-0 rounded-full object-cover mt-1"><span
+                class="hello text-xs dark:text-gray-400 cursor-pointer">admin <h2
+                  class="hidden px-5 py-2 bg-slate-100 border-[0.5px] border-black absolute text-black">author Profile
+                </h2></span>
+              <span class="text-xs dark:text-gray-400">{{ blog.date }}</span>
+            </div>
+          </a>
+      </div>
+    </div>
+      </section>
 
   <WebFooter />
 </template>
@@ -112,12 +99,13 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 // const details = ref({});
-const detail = ref([]);
+const detail = ref({});
+const detail2 = ref({});
 
 const blog = () => {
   axios
     .get(
-      `https://blog-api-dev.octalinfotech.com/blogs/${route.params.id}/show`,
+      `https://blog-api-dev.octalinfotech.com/api/blogs/${route.params.id}/show`,
       {
         headers: {
           token: "7ELX2CnkfqWpipzXNB5QV9sxSf4dPk",
@@ -125,7 +113,9 @@ const blog = () => {
       }
     )
     .then((res) => {
-      detail.value = res.data.data;
+      console.log(res);
+      detail.value = res.data.data.blog;
+      detail2.value = res.data.data.latestPost;
     })
     .catch((err) => {
       console.log(err);
@@ -137,56 +127,3 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-.description {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-.img {
-  width: 130px;
-  height: 130px;
-  border-radius: 100%;
-  border: 3px solid;
-}
-
-.img2 {
-  width: 60%;
-  border-radius: 10px;
-}
-
-.carousel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.head {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  align-items: center;
-}
-
-.container {
-  max-width: 1455px;
-}
-
-.detail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-}
-</style>

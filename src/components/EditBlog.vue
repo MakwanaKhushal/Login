@@ -1,7 +1,12 @@
 <template>
   <div style="display: flex; justify-content: center">
     <div class="container" style="margin-top: 50px">
-      <h1 class="form-title">Update Blog</h1>
+      <div class="flex justify-between items-center">
+        <h2 class="font-semibold leading-7 text-gray-900 form-title">Update Blog</h2><a href="/admin/blog" class=""><router-link  to="/admin/blog"><button
+          type="button"
+          class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 capitalize tracking-wide shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">Back</button></router-link>
+          </a>
+      </div>
 
       <form class="was-validated">
         <div class="main-user-info">
@@ -333,12 +338,12 @@ onMounted(() => {
 .container {
   width: 100%;
   max-width: 65%;
-  background-color: rgb(0, 37, 85);
-  background-image: linear-gradient(rgb(212, 223, 255), rgb(255, 226, 250));
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgb(221, 221, 221), rgb(143, 143, 143));
   padding: 28px;
   margin: 0 28px;
   border-radius: 10px;
-  box-shadow: inset 0px 0px 5px slategray;
+
   background-repeat: no-repeat;
 }
 
